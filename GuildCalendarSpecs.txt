@@ -1,0 +1,111 @@
+####################################
+### Guild Calendar Specification ###
+####################################
+
+== Features ==
+==============
+* Clean up Events older than setting (smallest is 3 months)
+* Timer to refresh current day
+* Personal and Guild Internal Channels for events and invites
+* Events Flag -- CalendarID: -- Which calendar is it a part of
+* View/Edit Event UI
+* Pin Bar Icon Features
+** Highlight if events that day. 
+** Highlight if invites pending and number of invite requests pending.
+
+
+== Functionality ==
+===================
+
+Loading/Displaying Schedule
+---------------------------
+* Clear current schedule (o.tTodaysSchedule) 
+* Load the current days scheduled events for the day from o.Events
+* Check that events are not overlapped. If they are, assign column number and number of columns to them in o.EventColumns
+* Create Event Blocks and add them to the schedule list, making sure to also add them to o.tTodaysSchedule
+
+
+== Channel Messaging ==
+=======================
+
+Guild Channel Messages  ("GuildCalendar_GuildName")
+---------------------------------------------------
+- RequestSync   	(Asked the Master of the Channel for a Sync of all the data on the network)
+- RequestMaster 	(Asks the channel master to identify themselves)
+- RequestNewMaster	(Tells all listeners in the channel to provide you with their master/login info)
+- AssumeMaster  	(Tells the channel that you are the new master -- this will happen after a request for sync fails to get a response)
+- AcknowledgeMaster	(Responds to the channel with an acknowledgement of who is master)
+- NewEvent			(Broadcasts a new event to the channel)
+- UpdateEvent		(Broadcasts event detail changes to the channel)
+- CancelEvent		(Broadcasts that an event was cancelled to the channel)
+- DeleteEvent		(Broadcasts that an event was deleted to the channel)
+
+
+Individual Channel Messages ("GuildCalendar_UserName")
+-----------------------------------------------------------------
+- Request		(Requests a private session with the user, to send an invite)
+- Acknowledge	(Responds to an request with an acknowledgement)
+- Finish		(Tells the channel users that the use is complete and can be closed)
+
+
+Individual Private Channel Messages ("GuildCalendar_UserName_SenderName")
+-----------------------------------------------------------------
+- Invite		(Pushes Invite information to the users if they're online and listening on said channel)
+- Acknowledge	(Responds to an invite with an acknowledgement)
+- Finish		(Tells the channel users that the use is complete and can be closed)
+
+
+
+local request =
+{
+   sender = "",
+   message = "",
+   payload = object
+}
+
+
+local tDefaultEvent = 
+{
+	uuid = "",
+	time = {
+		from = {
+			day = 0,
+			month = 0, 
+			year = 0,
+			hour = 0,
+			minute = 0
+		},
+		til = {
+			day = 0,
+			month = 0, 
+			year = 0,
+			hour = 0,
+			minute = 0
+		}
+	},
+	type = karEventTypes.Undetermined,
+	subtype = "",
+	title = "",
+	color = "",
+	channel = "",
+	description = "",
+	invitees = {},
+	attendees = {},
+	flags = {
+		allowSignups = true,
+		inviteOnly = true,
+		viewedInvite = false
+	},
+}   
+
+local tDefaultEventBlock = 
+{
+	eventID = "",
+	start = 0,
+	end = 0
+}
+
+local tEventBlocks = {
+}
+   
+   
