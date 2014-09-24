@@ -428,10 +428,50 @@ function GuildCalendar:OnDaySelected( wndHandler, wndControl, eMouseButton, nLas
 end
 
 ---------------------------------------------------------------------------------------------------
--- EventFormEdit Functions
+-- AddEventForm Functions
 ---------------------------------------------------------------------------------------------------
 
-function GuildCalendar:OnSelectionChanged( wndHandler, wndControl )
+function GuildCalendar:OnEditEventCancel( wndHandler, wndControl, eMouseButton )
+	self.wndEventAdd:Show(false)
+	self.wndEventAdd:Close()
+end
+
+function GuildCalendar:OnEditEventSave( wndHandler, wndControl, eMouseButton )
+	self.wndEventAdd:Show(false)
+	self.wndEventAdd:Close()
+end
+
+function GuildCalendar:OnColorPickerClick( wndHandler, wndControl, eMouseButton )
+
+end
+
+function GuildCalendar:OnInviteAdd( wndHandler, wndControl, eMouseButton )
+
+end
+
+function GuildCalendar:OnScheduleAdd( wndHandler, wndControl, eMouseButton )
+	self.wndEventAdd = Apollo.LoadForm(self.xmlDoc, "AddEventForm", nil, self)
+	local t_start = self.wndEventAdd:FindChild("StartTime"):FindChild("Data")
+	local t_end = self.wndEventAdd:FindChild("EndTime"):FindChild("Data")
+	self.wndStart = Apollo.LoadForm(self.xmlDoc, "DatePicker", t_start, self)
+	self.wndEnd = Apollo.LoadForm(self.xmlDoc, "DatePicker", t_end, self)
+	self.wndEventAdd:Show(true)
+	self.wndStart:Show(true)
+	self.wndEnd:Show(true)
+end
+
+
+function GuildCalendar:OnEventLocationClick( wndHandler, wndControl, eMouseButton, nLastRelativeMouseX, nLastRelativeMouseY, bDoubleClick, bStopPropagation )
+end
+
+function GuildCalendar:OnEventTypeClick( wndHandler, wndControl, eMouseButton, nLastRelativeMouseX, nLastRelativeMouseY, bDoubleClick, bStopPropagation )
+end
+
+---------------------------------------------------------------------------------------------------
+-- ColorPickerColor Functions
+---------------------------------------------------------------------------------------------------
+
+function GuildCalendar:OnColorPickerColorSelected( wndHandler, wndControl, eMouseButton )
 end
 
 -----------------------------------------------------------------------------------------------
