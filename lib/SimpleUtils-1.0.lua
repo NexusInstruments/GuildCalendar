@@ -19,7 +19,7 @@ function SimpleUtils:new(args)
    return setmetatable(new, SimpleUtils)
 end
 
-function string:split(inSplitPattern, outResults )
+function string:split(inSplitPattern, outResults)
    if not outResults then
       outResults = { }
    end
@@ -32,6 +32,16 @@ function string:split(inSplitPattern, outResults )
    end
    table.insert( outResults, string.sub( self, theStart ) )
    return outResults
+end
+
+function string:tohexstring(spacer)
+	return (
+		string.gsub(self,"(.)",
+			function (c)
+				return string.format("%02X%s",string.byte(c), spacer or "")
+			end
+		)
+	)
 end
 
 function shallowcopy(orig)
@@ -67,16 +77,6 @@ function tprint (tbl, indent)
       cprint(formatting .. v)
     end
   end
-end
-
-function HexDumpString(str,spacer)
-	return (
-		string.gsub(str,"(.)",
-			function (c)
-				return string.format("%02X%s",string.byte(c), spacer or "")
-			end
-		)
-	)
 end
 
 Apollo.RegisterPackage(SimpleUtils, S_MAJOR, S_MINOR, {})
