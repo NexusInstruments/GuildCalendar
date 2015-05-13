@@ -31,7 +31,7 @@ local karEventTypes =
 
 local karLocations = 
 {
-	["Datascape"] = "40_1",
+	["Datascape"] = "20_2",
 	["Genetic Archives"] = "20_1",
 }
 
@@ -202,10 +202,8 @@ function GuildCalendar:OnDocLoaded()
 			self.hours[hr] = wndHour
 		end
 		self.wndDayHours:ArrangeChildrenVert(0)
-		
 		self:InitCalendarReferences()
 		self:Refresh()
-	
 		-- if the xmlDoc is no longer needed, you should set it to nil
 		-- self.xmlDoc = nil
 		
@@ -215,7 +213,6 @@ function GuildCalendar:OnDocLoaded()
 		Apollo.RegisterSlashCommand("gcalendar", "OnSlashCommand", self)
 		Apollo.RegisterSlashCommand("calendar", "OnSlashCommand", self)
 		Apollo.RegisterSlashCommand("cal", "OnSlashCommand", self)
-
 
 		self.timer = ApolloTimer.Create(3600.000, true, "OnTimer", self)
 
