@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Addon Author="Chronosis" APIVersion="10" Name="GuildCalendar" Description="Guild Event Calendar">
+<Addon Author="Chronosis" APIVersion="12" Name="GuildCalendar" Description="Guild Event Calendar">
     <Script Name="GuildCalendar.lua"/>
     <Form Name="GuildCalendar.xml"/>
     <Script Name="lib/Chronology-1.0.lua"/>
